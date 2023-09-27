@@ -19,6 +19,7 @@ const App = () => {
       .then((data) => {
         console.log(data.data["weather"][0].main);
         setLocation(data.data);
+        setSearch("");
       })
       .catch ((error)=> {
         console.log(error);
