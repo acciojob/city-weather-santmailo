@@ -8,26 +8,34 @@ const App = () => {
 
 
   function userSearch(e){
-    setSearch(e.target.value);
+     setSearch(e.target.value);
   }
 
   React.useEffect(() => {
-    const fetchLocation = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=c5dba0fc1db11ac897ab58bfcad62702`;
-    axios.get(fetchLocation)
-    .then((data) => {
-      console.log(data.data["weather"][0].main);
-      setLocation(data.data);
-    })
-    .catch ((error)=> {
-      console.log(error);
-    })
+
+    // setTimeout(() => {
+      const fetchLocation = `https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=c5dba0fc1db11ac897ab58bfcad62702`;
+      axios.get(fetchLocation)
+      .then((data) => {
+        console.log(data.data["weather"][0].main);
+        setLocation(data.data);
+      })
+      .catch ((error)=> {
+        console.log(error);
+      })
+    // }, 2000)
   }, [search]);
+
+
+  React.useEffect(() => {
+    setSearch("");
+  }, [location]);
 
 
   return (
     <div>
         {/* Do not remove the main div */}
-        <input type="text" className="search" onChange={userSearch}/>
+        <input type="text" className="search" onChange={userSearch} value={search}/>
         {location!=null ? 
         <div className="weather">
           {/* <p>{location.weather.main}</p> */}
